@@ -1,0 +1,83 @@
+---
+- hosts: all
+  remote_user: clevanger
+  sudo: yes
+
+  tasks:
+    - name: Ensure Pidgin Messenger is installed
+      apt: pkg=pidgin state=present update_cache=yes
+
+    - name: Ensure Pip is installed
+      apt: pkg=python-pip state=present
+
+    - name: Ensure tmux is installed
+      apt: pkg=tmux state=present
+
+    - name: Ensure apache2 is installed
+      apt: pkg=apache2 state=present
+
+    - name: Ensure mysql-server is installed
+      apt: pkg=mysql-server state=present
+
+    - name: Ensure php5-mysql is installed
+      apt: pkg=pidgin state=present
+
+    - name: Ensure php5 is installed
+      apt: pkg=php5 state=present
+
+    - name: Ensure libapache2-mod-php5 is installed
+      apt: pkg=libapache2-mod-php5 state=present
+
+    - name: Ensure php5-mcrypt is installed
+      apt: pkg=php5-mcrypt state=present
+
+    - name: Ensure php5-cli is installed
+      apt: pkg=php5-cli state=present
+
+    - name: Ensure php5-curl is installed
+      apt: pkg=php5-curl state=present
+
+    - name: Ensure shutter is installed
+      apt: pkg=shutter state=present
+
+    - name: Ensure rhino is installed
+      apt: pkg=rhino state=present
+
+    - name: Ensure nodejs is installed
+      apt: pkg=nodejs state=present
+
+    - name: Ensure npm is installed
+      apt: pkg=npm state=present
+
+    - name: Ensure build-essential is installed
+      apt: pkg=build-essential state=present
+
+    - name: Ensure dia is installed
+      apt: pkg=dia state=present
+
+    - name: Ensure fontconfig is installed
+      apt: pkg=fontconfig state=present
+
+    - name: Ensure ruby is installed
+      apt: pkg=ruby state=present
+
+    - name: Install Spotify key from keyserver is installed
+      apt_key: id=94558F59 keyserver=keyserver.ubuntu.com
+
+    - name: Ensure Spotify PPA Repository is installed
+      apt_repository: state=present repo='deb http://repository.spotify.com stable non-free'
+
+    - name: Ensure Spotify is installed
+      apt: pkg=spotify-client state=present update_cache=yes
+
+    - name: Ensure grunt-cli is installed
+      npm: name=grunt-cli global=yes state=present
+
+    - name: Ensure bower is installed
+      npm: name=bower global=yes state=present
+
+    - name: Ensure karma is installed
+      npm: name=karma global=yes state=present
+
+    - name: Ensure phantomjs is installed
+      npm: name=phantomjs global=yes state=present
