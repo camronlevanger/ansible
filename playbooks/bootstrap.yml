@@ -81,3 +81,9 @@
 
     - name: Ensure phantomjs is installed
       npm: name=phantomjs global=yes state=present
+
+    - name: Run oh-my-zsh install script
+      command: curl -L http://install.ohmyz.sh | sh
+
+    - name: Install composer
+      command: sh files/global_composer_install.sh
