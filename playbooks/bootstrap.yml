@@ -13,6 +13,9 @@
     - name: Ensure tmux is installed
       apt: pkg=tmux state=present
 
+    - name: Ensure curl is installed
+      apt: pkg=curl state=present
+
     - name: Ensure apache2 is installed
       apt: pkg=apache2 state=present
 
