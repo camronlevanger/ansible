@@ -4,8 +4,11 @@
   sudo: yes
 
   tasks:
+    - name: Ensure git is installed
+      apt: pkg=git state=present update_cache=yes
+
     - name: Ensure Pidgin Messenger is installed
-      apt: pkg=pidgin state=present update_cache=yes
+      apt: pkg=pidgin state=present
 
     - name: Ensure Pip is installed
       apt: pkg=python-pip state=present
@@ -85,8 +88,11 @@
     - name: Ensure phantomjs is installed
       npm: name=phantomjs global=yes state=present
 
-    - name: Run oh-my-zsh install script
-      command: curl -L http://install.ohmyz.sh | sh
+    - name: Set git config user.name
+      command: git config --global user.name "Camron Levanger"
+
+    - name: Set git config user.name
+      command: git config --global user.email "clevanger@insidesales.com"
 
     - name: Install composer
       command: sh files/global_composer_install.sh
