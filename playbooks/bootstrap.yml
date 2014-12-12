@@ -52,6 +52,9 @@
     - name: Ensure nodejs is installed
       apt: pkg=nodejs state=present
 
+    - name: Fix nodejs names in Ubuntu
+      script: sh files/fix_nodejs.sh
+
     - name: Ensure npm is installed
       apt: pkg=npm state=present
 
@@ -95,4 +98,7 @@
       command: git config --global user.email "clevanger@insidesales.com"
 
     - name: Install composer
-      command: sh files/global_composer_install.sh
+      script: files/global_composer_install.sh
+
+    - name: Fix nodejs names in Ubuntu
+      script: files/install_oh-my-zsh.sh
