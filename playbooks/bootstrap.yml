@@ -2,6 +2,8 @@
 - hosts: all
   remote_user: clevanger
   sudo: yes
+  vars:
+    home_user: clevanger
 
   tasks:
     - name: Install Spotify key from keyserver is installed
@@ -24,6 +26,9 @@
 
     - name: Ensure git is installed
       apt: pkg=git state=present update_cache=yes
+
+    - name: Ensure zsh is installed
+      apt: pkg=zsh state=present
 
     - name: Ensure Pidgin Messenger is installed
       apt: pkg=pidgin state=present
@@ -123,3 +128,18 @@
 
     - name: Fix nodejs names in Ubuntu
       script: ../files/install_oh-my-zsh.sh
+
+    - name: Update bashrc to launch zsh for user
+      lineinfile: dest=/home/{{ home_user }}/.bashrc line="zsh" regexp="^zsh" owner={{ home_user}} state=present insertafter=EOF create=True
+
+    - name: Copy over .vimrc files
+      copy: src=../files/.vimrc dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+    - name: Copy over .tmux.conf files
+      copy: src=../files/.tmux.conf dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+    - name: Copy over .zprofile files
+      copy: src=../files/.zprofile dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+    - name: Copy over .zshrc files
+      copy: src=../files/.zshrc dest=/home/{{ home_user }}/ owner={{ home_user }}
