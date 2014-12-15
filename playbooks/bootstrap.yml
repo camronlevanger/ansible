@@ -4,6 +4,15 @@
   sudo: yes
 
   tasks:
+    - name: Install Spotify key from keyserver is installed
+      apt_key: id=94558F59 keyserver=keyserver.ubuntu.com
+
+    - name: Ensure Spotify PPA Repository is installed
+      apt_repository: state=present repo='deb http://repository.spotify.com stable non-free'
+
+    - name: Add SublimeText3 repo
+      apt_repository: repo='ppa:webupd8team/sublime-text-3' state=present update_cache=yes
+
     - name: Ensure git is installed
       apt: pkg=git state=present update_cache=yes
 
@@ -70,11 +79,8 @@
     - name: Ensure ruby is installed
       apt: pkg=ruby state=present
 
-    - name: Install Spotify key from keyserver is installed
-      apt_key: id=94558F59 keyserver=keyserver.ubuntu.com
-
-    - name: Ensure Spotify PPA Repository is installed
-      apt_repository: state=present repo='deb http://repository.spotify.com stable non-free'
+    - name: Install SublimeText3
+      apt: pkg=sublime-text-installer state=present
 
     - name: Ensure Spotify is installed
       apt: pkg=spotify-client state=present update_cache=yes
