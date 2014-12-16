@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Documents/workspace
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -71,12 +71,12 @@ source /usr/local/bin/virtualenvwrapper.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # include common exports and alias
-source ~/.shrc
+#source ~/.shrc
 
 # Aliases
 alias gitcore="git"
 alias gs="git status"
-alias gp="git pull"
+alias gp="git pull --rebase"
 alias gcb="git checkout -b"
 alias gpo="git pull origin"
 alias gc="git checkout"

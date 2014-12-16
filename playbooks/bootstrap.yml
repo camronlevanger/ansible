@@ -11,12 +11,15 @@
       apt_key: id=94558F59 keyserver=keyserver.ubuntu.com
 
     - name: Ensure Spotify PPA Repository is installed
+      apt_repository: state=present repo='ppa:nvbn-rm/ppa' validate_certs=no
+
+    - name: Ensure Everpad PPA Repository is installed
       apt_repository: state=present repo='deb http://repository.spotify.com stable non-free'
 
     - name: Ensure Oracle JDK PPA Repository is installed
       apt_repository: state=present repo='ppa:webupd8team/java' validate_certs=no
 
-    - name: Add SublimeText3 repo
+    - name: Ensure Sublimetext3 PPA Repository is installed
       apt_repository: repo='ppa:webupd8team/sublime-text-3' state=present
 
     - name: Autoaccept license for Java
@@ -31,8 +34,14 @@
     - name: Ensure zsh is installed
       apt: pkg=zsh state=present
 
+    - name: Ensure htop is installed
+      apt: pkg=htop state=present
+
     - name: Ensure Pidgin Messenger is installed
       apt: pkg=pidgin state=present
+
+    - name: Ensure Everpad is installed
+      apt: pkg=everpad state=present
 
     - name: Ensure Pip is installed
       apt: pkg=python-pip state=present
