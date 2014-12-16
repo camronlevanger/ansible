@@ -4,6 +4,7 @@
   sudo: yes
   vars:
     home_user: clevanger
+    workspace: /home/{{ home_user }}/Documents
 
   tasks:
     - name: Install Spotify key from keyserver is installed
@@ -143,3 +144,9 @@
 
     - name: Copy over .zshrc files
       copy: src=../files/.zshrc dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+    - name: Download Dropbox
+      get_url: url="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.2_amd64.deb" dest="/home/{{ home_user }}/Downloads/dropbox.deb"
+
+    - name: Install Dropbox
+      apt: deb=/home/{{ home_user }}/Downloads/dropbox.deb
