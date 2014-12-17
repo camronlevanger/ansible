@@ -40,6 +40,9 @@
     - name: Ensure Pidgin Messenger is installed
       apt: pkg=pidgin state=present
 
+    - name: Ensure Emma is installed
+      apt: pkg=emma state=present
+
     - name: Ensure Everpad is installed
       apt: pkg=everpad state=present
 
