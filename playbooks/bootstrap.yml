@@ -79,6 +79,9 @@
     - name: Ensure php5-curl is installed
       apt: pkg=php5-curl state=present
 
+    - name: Ensure php-pear is installed
+      apt: pkg=php-pear state=present
+
     - name: Ensure Java JDK is installed
       apt: pkg=oracle-java8-installer state=present
 
