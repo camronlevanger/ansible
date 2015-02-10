@@ -24,9 +24,9 @@
 
     - name: Autoaccept license for Java
       action: shell echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
- 
+
     - name: Update APT package cache
-      action: apt update_cache=yes 
+      action: apt update_cache=yes
 
     - name: Ensure git is installed
       apt: pkg=git state=present update_cache=yes
@@ -88,6 +88,9 @@
     - name: Ensure Oracle Java is default
       apt: pkg=oracle-java8-set-default state=present
 
+    - name: Ensure Ant is installed
+      apt: pkg=ant state=present
+
     - name: Ensure shutter is installed
       apt: pkg=shutter state=present
 
@@ -139,7 +142,7 @@
     - name: Set git config user.name
       command: git config --global user.email "clevanger@insidesales.com"
 
-    - name: UFW oopen port 9000 for xdebug connections
+    - name: UFW open port 9000 for xdebug connections
       command: ufw allow 9000
 
     - name: Install composer
