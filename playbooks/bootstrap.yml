@@ -1,9 +1,9 @@
 ---
 - hosts: all
-  remote_user: clevanger
+  remote_user: cparkins
   sudo: yes
   vars:
-    home_user: clevanger
+    home_user: cparkins
     workspace: /home/{{ home_user }}/Documents
 
   tasks:
@@ -13,14 +13,8 @@
     - name: Ensure Spotify PPA Repository is installed
       apt_repository: state=present repo='ppa:nvbn-rm/ppa' validate_certs=no
 
-    - name: Ensure Everpad PPA Repository is installed
-      apt_repository: state=present repo='deb http://repository.spotify.com stable non-free'
-
     - name: Ensure Oracle JDK PPA Repository is installed
       apt_repository: state=present repo='ppa:webupd8team/java' validate_certs=no
-
-    - name: Ensure Sublimetext3 PPA Repository is installed
-      apt_repository: repo='ppa:webupd8team/sublime-text-3' state=present
 
     - name: Autoaccept license for Java
       action: shell echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
@@ -31,29 +25,11 @@
     - name: Ensure git is installed
       apt: pkg=git state=present update_cache=yes
 
-    - name: Ensure zsh is installed
-      apt: pkg=zsh state=present
-
     - name: Ensure htop is installed
       apt: pkg=htop state=present
 
     - name: Ensure Pidgin Messenger is installed
       apt: pkg=pidgin state=present
-
-    - name: Ensure Emma is installed
-      apt: pkg=emma state=present
-
-    - name: Ensure Everpad is installed
-      apt: pkg=everpad state=present
-
-    - name: Ensure Pip is installed
-      apt: pkg=python-pip state=present
-
-    - name: Ensure tmux is installed
-      apt: pkg=tmux state=present
-
-    - name: Ensure curl is installed
-      apt: pkg=curl state=present
 
     - name: Ensure apache2 is installed
       apt: pkg=apache2 state=present
@@ -62,7 +38,7 @@
       apt: pkg=mysql-server state=present
 
     - name: Ensure php5-mysql is installed
-      apt: pkg=pidgin state=present
+      apt: pkg=php5-mysql state=present
 
     - name: Ensure php5 is installed
       apt: pkg=php5 state=present
@@ -91,12 +67,6 @@
     - name: Ensure Ant is installed
       apt: pkg=ant state=present
 
-    - name: Ensure shutter is installed
-      apt: pkg=shutter state=present
-
-    - name: Ensure rhino is installed
-      apt: pkg=rhino state=present
-
     - name: Ensure nodejs is installed
       apt: pkg=nodejs state=present
 
@@ -109,17 +79,11 @@
     - name: Ensure build-essential is installed
       apt: pkg=build-essential state=present
 
-    - name: Ensure dia is installed
-      apt: pkg=dia state=present
-
     - name: Ensure fontconfig is installed
       apt: pkg=fontconfig state=present
 
     - name: Ensure ruby is installed
       apt: pkg=ruby state=present
-
-    - name: Install SublimeText3
-      apt: pkg=sublime-text-installer state=present
 
     - name: Ensure Spotify is installed
       apt: pkg=spotify-client state=present update_cache=yes
@@ -137,10 +101,10 @@
       npm: name=phantomjs global=yes state=present
 
     - name: Set git config user.name
-      command: git config --global user.name "Camron Levanger"
+      command: git config --global user.name "Chris Parkins"
 
     - name: Set git config user.name
-      command: git config --global user.email "clevanger@insidesales.com"
+      command: git config --global user.email "cparkins@insidesales.com"
 
     - name: UFW open port 9000 for xdebug connections
       command: ufw allow 9000
@@ -148,26 +112,11 @@
     - name: Install composer
       script: ../files/global_composer_install.sh
 
-    - name: Fix nodejs names in Ubuntu
-      script: ../files/install_oh-my-zsh.sh
-
-    - name: Update bashrc to launch zsh for user
-      lineinfile: dest=/home/{{ home_user }}/.bashrc line="zsh" regexp="^zsh" owner={{ home_user}} state=present insertafter=EOF create=True
-
     - name: Copy over .vimrc files
       copy: src=../files/.vimrc dest=/home/{{ home_user }}/ owner={{ home_user }}
-
-    - name: Copy over .tmux.conf files
-      copy: src=../files/.tmux.conf dest=/home/{{ home_user }}/ owner={{ home_user }}
-
-    - name: Copy over .zprofile files
-      copy: src=../files/.zprofile dest=/home/{{ home_user }}/ owner={{ home_user }}
-
-    - name: Copy over .zshrc files
-      copy: src=../files/.zshrc dest=/home/{{ home_user }}/ owner={{ home_user }}
-
-    - name: Download Dropbox
-      get_url: url="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.2_amd64.deb" dest="/home/{{ home_user }}/Downloads/dropbox.deb"
-
-    - name: Install Dropbox
-      apt: deb=/home/{{ home_user }}/Downloads/dropbox.deb
+      
+    - name: Download steam .deb fil
+      get_url: url="http://media.steampowered.com/client/installer/steam.deb" dest="/home/{{ home_user }}/Downloads/steam.deb"
+      
+    - name: Install steam
+      apt: deb=/home/{{ home_user }}/Downloads/steam.deb
