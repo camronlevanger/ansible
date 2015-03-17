@@ -62,7 +62,7 @@
       apt: pkg=mysql-server state=present
 
     - name: Ensure php5-mysql is installed
-      apt: pkg=pidgin state=present
+      apt: pkg=php5-mysql state=present
 
     - name: Ensure php5 is installed
       apt: pkg=php5 state=present
