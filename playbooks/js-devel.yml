@@ -1,0 +1,29 @@
+- name: Ensure rhino is installed
+  apt: pkg=rhino state=present
+
+- name: Ensure nodejs is installed
+  apt: pkg=nodejs state=present
+
+- name: Fix nodejs names in Ubuntu
+  script: ../files/fix_nodejs.sh ignore_errors=True
+
+- name: Ensure npm is installed
+  apt: pkg=npm state=present
+
+- name: Ensure fontconfig is installed
+  apt: pkg=fontconfig state=present
+
+- name: Ensure ruby is installed
+  apt: pkg=ruby state=present
+
+- name: Ensure grunt-cli is installed
+  npm: name=grunt-cli global=yes state=present
+
+- name: Ensure bower is installed
+  npm: name=bower global=yes state=present
+
+- name: Ensure karma is installed
+  npm: name=karma global=yes state=present
+
+- name: Ensure phantomjs is installed
+  npm: name=phantomjs global=yes state=present

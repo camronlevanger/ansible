@@ -1,0 +1,47 @@
+- name: Ensure Oracle JDK PPA Repository is installed
+  apt_repository: state=present repo='ppa:webupd8team/java' validate_certs=no
+
+- name: Autoaccept license for Java
+  action: shell echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+
+- name: Update APT package cache
+  action: apt update_cache=yes
+
+- name: Ensure git is installed
+  apt: pkg=git state=present update_cache=yes
+
+- name: Ensure zsh is installed
+  apt: pkg=zsh state=present
+
+- name: Ensure htop is installed
+  apt: pkg=htop state=present
+
+- name: Ensure Pip is installed
+  apt: pkg=python-pip state=present
+
+- name: Ensure tmux is installed
+  apt: pkg=tmux state=present
+
+- name: Ensure curl is installed
+  apt: pkg=curl state=present
+
+- name: Ensure Java JDK is installed
+  apt: pkg=oracle-java8-installer state=present
+
+- name: Ensure Oracle Java is default
+  apt: pkg=oracle-java8-set-default state=present
+
+- name: Ensure Ant is installed
+  apt: pkg=ant state=present
+
+- name: Ensure build-essential is installed
+  apt: pkg=build-essential state=present
+
+- name: Fix nodejs names in Ubuntu
+  script: ../files/install_oh-my-zsh.sh
+
+- name: Set git config user.name
+  command: git config --global user.name {{git_name}}
+
+- name: Set git config user.name
+  command: git config --global user.email {{git_email}}
