@@ -1,137 +1,23 @@
 ---
 - hosts: all
   vars_prompt:
-    home_user: "what is your user name?"
+    home_user: "What is your username?"
+    git_name: "What is your full name (for git)?"
+    git_email: "What is your email (for git)?"
   sudo: yes
   vars:
     workspace: /home/{{ home_user }}/Documents
 
   tasks:
-    - name: Install Spotify key from keyserver is installed
-      apt_key: id=94558F59 keyserver=keyserver.ubuntu.com
-
-    - name: Ensure Spotify Repository is installed
-      apt_repository: state=present repo='deb http://repository.spotify.com stable non-free' validate_certs=yes
-
-    - name: Ensure Oracle JDK PPA Repository is installed
-      apt_repository: state=present repo='ppa:webupd8team/java' validate_certs=no
-
-    - name: Autoaccept license for Java
-      action: shell echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-
     - name: Update APT package cache
       action: apt update_cache=yes
 
-    - name: Ensure git is installed
-      apt: pkg=git state=present update_cache=yes
+    - include: utils.yml
 
-    - name: Ensure htop is installed
-      apt: pkg=htop state=present
+    - include: lamp.yml
 
-    - name: Ensure curl is installed
-      apt: pkg=curl state=present
+    - include: js-devel.yml
 
-    - name: Ensure Pidgin Messenger is installed
-      apt: pkg=pidgin state=present
+    - include: desktop.yml
 
-    - name: Ensure apache2 is installed
-      apt: pkg=apache2 state=present
-
-    - name: Ensure mysql-server is installed
-      apt: pkg=mysql-server state=present
-
-    - name: Ensure php5-mysql is installed
-      apt: pkg=php5-mysql state=present
-
-    - name: Ensure php5 is installed
-      apt: pkg=php5 state=present
-
-    - name: Ensure libapache2-mod-php5 is installed
-      apt: pkg=libapache2-mod-php5 state=present
-
-    - name: Ensure php5-mcrypt is installed
-      apt: pkg=php5-mcrypt state=present
-
-    - name: Ensure php5-cli is installed
-      apt: pkg=php5-cli state=present
-
-    - name: Ensure php5-curl is installed
-      apt: pkg=php5-curl state=present
-
-    - name: Ensure php-pear is installed
-      apt: pkg=php-pear state=present
-
-    - name: Ensure Java JDK is installed
-      apt: pkg=oracle-java8-installer state=present
-
-    - name: Ensure Oracle Java is default
-      apt: pkg=oracle-java8-set-default state=present
-
-    - name: Ensure Ant is installed
-      apt: pkg=ant state=present
-
-    - name: Ensure nodejs is installed
-      apt: pkg=nodejs state=present
-
-    - name: Fix nodejs names in Ubuntu
-      script: ../files/fix_nodejs.sh ignore_errors=True
-
-    - name: Ensure npm is installed
-      apt: pkg=npm state=present
-
-    - name: Ensure build-essential is installed
-      apt: pkg=build-essential state=present
-
-    - name: Ensure fontconfig is installed
-      apt: pkg=fontconfig state=present
-
-    - name: Ensure ruby is installed
-      apt: pkg=ruby state=present
-
-    - name: Ensure Spotify is installed
-      apt: pkg=spotify-client state=present update_cache=yes
-
-    - name: Ensure grunt-cli is installed
-      npm: name=grunt-cli global=yes state=present
-
-    - name: Ensure bower is installed
-      npm: name=bower global=yes state=present
-
-    - name: Ensure karma is installed
-      npm: name=karma global=yes state=present
-
-    - name: Ensure phantomjs is installed
-      npm: name=phantomjs global=yes state=present
-
-    - name: Set git config user.name
-      command: git config --global user.name "Chris Parkins"
-
-    - name: Set git config user.name
-      command: git config --global user.email "cparkins@insidesales.com"
-
-    - name: UFW open port 9000 for xdebug connections
-      command: ufw allow 9000
-
-    - name: Install composer
-      script: ../files/global_composer_install.sh
-
-    - name: Copy over .vimrc files
-      copy: src=../files/.vimrc dest=/home/{{ home_user }}/ owner={{ home_user }}
-      
-    - name: Download steam .deb fil
-      get_url: url="http://media.steampowered.com/client/installer/steam.deb" dest="/home/{{ home_user }}/Downloads/steam.deb"
-      
-    - name: Install steam
-      apt: deb=/home/{{ home_user }}/Downloads/steam.deb
-
-    - name: Ensure Vagrant is installed
-      apt: pkg=vagrant state=present
-
-    - name: Ensure VirtualBox is installed
-      apt: pkg=virtualbox state=present
-
-    - name: Ensure SASS is installed
-      apt: pkg=ruby-sass state=present
-
-    - name: Ensure CairoDock is installed
-      apt: pkg=cairo-dock state=present
+    - include: conf.yml

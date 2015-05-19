@@ -1,0 +1,50 @@
+- name: Install Spotify key from keyserver is installed
+  apt_key: id=94558F59 keyserver=keyserver.ubuntu.com
+
+- name: Ensure Everpad PPA Repository is installed
+  apt_repository: state=present repo='ppa:nvbn-rm/ppa' validate_certs=no
+
+- name: Ensure Spotify PPA Repository is installed
+  apt_repository: state=present repo='deb http://repository.spotify.com stable non-free'
+
+- name: Ensure Sublimetext3 PPA Repository is installed
+  apt_repository: repo='ppa:webupd8team/sublime-text-3' state=present
+
+- name: Update APT package cache
+  action: apt update_cache=yes
+
+- name: Ensure Pidgin Messenger is installed
+  apt: pkg=pidgin state=present
+
+- name: Ensure Emma is installed
+  apt: pkg=emma state=present
+
+- name: Ensure Everpad is installed
+  apt: pkg=everpad state=present
+
+- name: Ensure shutter is installed
+  apt: pkg=shutter state=present
+
+- name: Ensure spotify is installed
+  apt: pkg=spotify-client state=present
+
+- name: Ensure sublimetext3 is installed
+  apt: pkg=sublime-text-installer state=present
+
+- name: Ensure dia is installed
+  apt: pkg=dia state=present
+
+- name: Download Dropbox
+  get_url: url="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.2_amd64.deb" dest="/home/{{ home_user }}/Downloads/dropbox.deb"
+
+- name: Install Dropbox
+  apt: deb=/home/{{ home_user }}/Downloads/dropbox.deb
+
+- name: Download Steam
+  get_url: url="http://media.steampowered.com/client/installer/steam.deb" dest="/home/{{ home_user }}/Downloads/steam.deb"
+
+- name: Install steam
+  apt: deb=/home/{{ home_user }}/Downloads/steam.deb
+
+- name: Ensure CairoDock is installed
+  apt: pkg=cairo-dock state=present

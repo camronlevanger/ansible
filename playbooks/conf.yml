@@ -1,0 +1,14 @@
+- name: Update bashrc to launch zsh for user
+  lineinfile: dest=/home/{{ home_user }}/.bashrc line="zsh" regexp="^zsh" owner={{ home_user}} state=present insertafter=EOF create=True
+
+- name: Copy over .vimrc files
+  copy: src=../files/.vimrc dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+- name: Copy over .tmux.conf files
+  copy: src=../files/.tmux.conf dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+- name: Copy over .zprofile files
+  copy: src=../files/.zprofile dest=/home/{{ home_user }}/ owner={{ home_user }}
+
+- name: Copy over .zshrc files
+  copy: src=../files/.zshrc dest=/home/{{ home_user }}/ owner={{ home_user }}
