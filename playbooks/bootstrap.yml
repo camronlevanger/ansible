@@ -1,12 +1,12 @@
 ---
 - hosts: all
-  remote_user: camronlevanger
+  vars_prompt:
+    home_user: "What is your username?"
+    git_name: "What is your full name (for git)?"
+    git_email: "What is your email (for git)?"
   sudo: yes
   vars:
-    home_user: camronlevanger
     workspace: /home/{{ home_user }}/Documents
-    git_name: Camron Levanger
-    git_email: clevanger@insidesales.com
 
   tasks:
     - name: Update APT package cache

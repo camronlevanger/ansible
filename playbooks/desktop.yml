@@ -39,3 +39,12 @@
 
 - name: Install Dropbox
   apt: deb=/home/{{ home_user }}/Downloads/dropbox.deb
+
+- name: Download Steam
+  get_url: url="http://media.steampowered.com/client/installer/steam.deb" dest="/home/{{ home_user }}/Downloads/steam.deb"
+
+- name: Install steam
+  apt: deb=/home/{{ home_user }}/Downloads/steam.deb
+
+- name: Ensure CairoDock is installed
+  apt: pkg=cairo-dock state=present

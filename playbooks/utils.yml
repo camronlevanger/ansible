@@ -37,6 +37,12 @@
 - name: Ensure build-essential is installed
   apt: pkg=build-essential state=present
 
+- name: Ensure Vagrant is installed
+  apt: pkg=vagrant state=present
+
+- name: Ensure VirtualBox is installed
+  apt: pkg=virtualbox state=present
+
 - name: Fix nodejs names in Ubuntu
   script: ../files/install_oh-my-zsh.sh
 

@@ -16,6 +16,9 @@
 - name: Ensure ruby is installed
   apt: pkg=ruby state=present
 
+- name: Ensure SASS is installed
+  apt: pkg=ruby-sass state=present
+
 - name: Ensure grunt-cli is installed
   npm: name=grunt-cli global=yes state=present
 
