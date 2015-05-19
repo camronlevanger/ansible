@@ -33,3 +33,6 @@
 
 - name: UFW open port 9000 for xdebug connections
   command: ufw allow 9000
+
+- name: Apache enable mod-rewrite
+  action: command a2enmod rewrite vhost_alias
