@@ -11,6 +11,8 @@ Ansible 1.7+ is required to run this playbook.
 
 To install ansible follow the instructions from their site: http://docs.ansible.com/intro_installation.html
 
+I **highly** recommend using pip to install Ansible, this makes it much easier to get the required 1.7+ version.
+
 Ubuntu Installation (without PPA)
 ---------------------------------
 In Ubuntu 14.04 Ansible 1.7 is currently available as a backport as well as through the PPA.  To determine the most recent version currently available issue the following command:
